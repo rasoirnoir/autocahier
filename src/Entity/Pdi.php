@@ -68,6 +68,11 @@ class Pdi
      */
     private $libelle_id;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ordre;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -201,6 +206,18 @@ class Pdi
     public function setLibelleId(?Libelle $libelle_id): self
     {
         $this->libelle_id = $libelle_id;
+
+        return $this;
+    }
+
+    public function getOrdre(): ?int
+    {
+        return $this->ordre;
+    }
+
+    public function setOrdre(int $ordre): self
+    {
+        $this->ordre = $ordre;
 
         return $this;
     }

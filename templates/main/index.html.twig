@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>AFFICHAGE DE LA LISTE DES TOURNEES</h1>
+
+    Affiche la liste de toutes les tournées.
+
+    <ul>
+        <li>Un boutton permettra de supprimer une tournée.</li>
+        <li>Un autre permettra d'en ajouter une nouvelle.</li>
+        <li>Cliquer sur une tournée enverra sur la page de visualisation des pdis de celle-ci.</li>
+    </ul>
+
+
+    {% for tournee in tournees %}
+        <h2>{{ tournee.name }}</h2>
+        <p>crée le {{ tournee.createdAt | date('d/m/Y') }}</p>
+    {% endfor %}
+
+{% endblock %}

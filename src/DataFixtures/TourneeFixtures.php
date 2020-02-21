@@ -32,20 +32,34 @@ class TourneeFixtures extends Fixture
 
         $manager->persist($tournee);
 
+        $pdi_ordre = 1;
         //génération des libellés et des pdis associés
         for($i = 0; $i < 4 ; $i++){
             $libelle = new Libelle();
             $libelle->setName($faker->streetName());
             $libelle->setCreatedAt(new \DateTime());
             $libelle->setUpdatedAt(new \DateTime());
-            $libelle->setVilleId($ville->getId());
+            $libelle->setVilleId($ville);
 
             $manager->persist($libelle);
 
             //pdis dans cette rue
             for($j = 0; $j < mt_rand(4, 15); $j++){
                 $pdi = new Pdi();
-                
+                $pdi->setNumero($faker->numberBetween(1, 50));
+                $pdi->setClientName($faker->lastName());
+                $pdi->setIsDepot(False);
+                $pdi->setNbBoites(1);
+                $pdi->setIsReex(False);
+                $pdi->setCreatedAt(new \DateTime());
+                $pdi->setUpdatedAt(new \DateTime());
+                $pdi->setTourneeId($tournee);
+                $pdi->setLibelleId($libelle);
+                $pdi->setOrdre($pdi_ordre);
+                $pdi_ordre++;
+                $pdi->setFormat('1x1');
+
+                $manager->persist($pdi);
             }
         }
 

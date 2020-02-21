@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Edition d'un point de distribution.</h1>
+
+    Affiche les détails spécifiques à un point de distribution
+
+    <ul>
+        <li>Un formulaire permettra d'ajouter ou modifier les informations liées au pdi.</li>
+    </ul>
+
+    {{form(formPdi)}}
+
+{% endblock %}

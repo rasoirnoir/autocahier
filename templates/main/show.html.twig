@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Tournee {{ tournee.name }}</h1>
+
+    Affiche des pdis d'une tournée spécifique
+
+    <ul>
+        <li>Un boutton permettra de supprimer un pdi.</li>
+        <li>Un autre permettra d'en ajouter un nouveau.</li>
+        <li>Il faudra pouvoir les déplacer.</li>
+        <li>Cliquer sur un pdi nous enverra sur une page pour éventuellement le modifier.</li>
+    </ul>
+
+
+    {% for pdi in tournee.pdis %}
+        <p><strong>{{pdi.numero}}</strong> {{pdi.libelleid.name}} {{pdi.clientName}} </p>
+    {% endfor %}
+
+{% endblock %}

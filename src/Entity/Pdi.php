@@ -31,10 +31,6 @@ class Pdi
      */
     private $is_depot;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $is_batiment;
 
     /**
      * @ORM\Column(type="integer")
@@ -72,6 +68,11 @@ class Pdi
      * @ORM\Column(type="integer")
      */
     private $ordre;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $format;
 
     public function getId(): ?int
     {
@@ -218,6 +219,18 @@ class Pdi
     public function setOrdre(int $ordre): self
     {
         $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    public function getFormat(): ?string
+    {
+        return $this->format;
+    }
+
+    public function setFormat(string $format): self
+    {
+        $this->format = $format;
 
         return $this;
     }

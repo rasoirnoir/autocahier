@@ -2,6 +2,8 @@
 
 
 {% block body %}
+
+<!--
     <h1>Edition d'un point de distribution.</h1>
 
     Affiche les détails spécifiques à un point de distribution
@@ -9,11 +11,21 @@
     <ul>
         <li>Un formulaire permettra d'ajouter ou modifier les informations liées au pdi.</li>
     </ul>
-    
-    {{form_start(formPdi)}}
-    {{form_widget(formPdi)}}
-    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+
+-->
+    <div class="jumbotron">
+        {{form_start(formPdi)}}
+        {{form_widget(formPdi)}}
+        <button type="submit" class="btn btn-primary">
+            {% if editMode %}
+                Mettre à jour
+            {% else %}
+                Ajouter
+            {% endif %}
+        </button>
     {{form_end(formPdi)}}
+    </div>
+    
     
 
 {% endblock %}

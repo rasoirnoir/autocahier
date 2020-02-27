@@ -2,9 +2,6 @@
 
 
 {% block body %}
-    <h1>Tournee {{ tournee.name }}</h1>
-
-
 <!--
     Affiche des pdis d'une tournée spécifique
 
@@ -17,8 +14,9 @@
 
 -->
 
-
-    <table class="table table-hover table-striped">
+<div class="jumbotron">
+    <h1>Tournee {{ tournee.name }}</h1>
+    <table class="table table-hover table-striped table-primary">
         <tr><th>numéro</th><th>rue</th><th>nom</th></tr>
         {% for pdi in tournee.pdis %}
             <tr style="cursor: pointer;" onclick="window.location='{{ path('pdi_edit', {'id': pdi.id}) }}';">
@@ -28,6 +26,8 @@
             </tr>
         {% endfor %}
     </table>
+</div>
+
     
 
 {% endblock %}

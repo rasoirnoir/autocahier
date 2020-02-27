@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pdi;
 use App\Entity\Tournee;
+use App\Form\PdiFormType;
 use App\Repository\TourneeRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,6 +44,7 @@ class MainController extends AbstractController
         if(!$pdi){
             $pdi = new Pdi();
         }
+        /*
         $form = $this->createFormBuilder($pdi)
                     ->add('clientName')
                     ->add('numero')
@@ -50,11 +52,16 @@ class MainController extends AbstractController
                         'false_values' => [0, '0'],
                         ])
                     ->getForm();
+        */
+
+        $form = $this->createForm(PdiFormType::class, $pdi);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $pdi->setCreatedAt(new \DateTime());
+            if(!$pdi->getId()){
+                $pdi->setCreatedAt(new \DateTime());
+            }
             $pdi->setUpdatedAt(new \DateTime());
 
             $manager->persist($pdi);
@@ -64,8 +71,8 @@ class MainController extends AbstractController
         }
 
         return $this->render('main/editPdi.html.twig', [
-            'pdi' => $pdi,
             'formPdi' => $form->createView(),
+            'editMode' => $pdi->getId() !== null,
         ]);
     }
 }

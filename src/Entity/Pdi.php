@@ -9,6 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Pdi
 {
+
+    public function __construct(){
+        $this->format = '1x1';
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -32,10 +36,6 @@ class Pdi
     private $is_depot;
 
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $nb_boites;
 
     /**
      * @ORM\Column(type="boolean")
@@ -115,30 +115,6 @@ class Pdi
         return $this;
     }
 
-    public function getIsBatiment(): ?bool
-    {
-        return $this->is_batiment;
-    }
-
-    public function setIsBatiment(bool $is_batiment): self
-    {
-        $this->is_batiment = $is_batiment;
-
-        return $this;
-    }
-
-    public function getNbBoites(): ?int
-    {
-        return $this->nb_boites;
-    }
-
-    public function setNbBoites(int $nb_boites): self
-    {
-        $this->nb_boites = $nb_boites;
-
-        return $this;
-    }
-
     public function getIsReex(): ?bool
     {
         return $this->is_reex;
@@ -171,18 +147,6 @@ class Pdi
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getRelation(): ?string
-    {
-        return $this->relation;
-    }
-
-    public function setRelation(string $relation): self
-    {
-        $this->relation = $relation;
 
         return $this;
     }

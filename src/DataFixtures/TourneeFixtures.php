@@ -49,7 +49,6 @@ class TourneeFixtures extends Fixture
                 $pdi->setNumero($faker->numberBetween(1, 50));
                 $pdi->setClientName($faker->lastName());
                 $pdi->setIsDepot(False);
-                $pdi->setNbBoites(1);
                 $pdi->setIsReex(False);
                 $pdi->setCreatedAt(new \DateTime());
                 $pdi->setUpdatedAt(new \DateTime());

@@ -3,9 +3,25 @@
 {% block title %}Gestion admin{% endblock %}
 
 {% block body %}
+<!--
     <h1>Page de création ou modification d'un utilisateur.</h1>
     <ul>
         <li>Cette page Permettra de créer un nouvel utilisateur.</li>
         <li>Mais aussi de modifier les informations relatives à un utilisateur existant.</li>
     </ul>
+    -->
+
+    <div class="jumbotron">
+        {{form_start(formUser)}}
+        {{form_widget(formUser)}}
+        <button type="submit" class="btn btn-primary">
+            {% if editMode %}
+                Mettre à jour
+            {% else %}
+                Ajouter
+            {% endif %}
+        </button>
+        {{form_end(formUser)}}
+    </div>
+
 {% endblock %}

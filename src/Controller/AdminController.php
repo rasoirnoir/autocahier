@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserFormType;
+use App\Repository\RoleRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,10 +16,13 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin", name="admin")
      */
-    public function index()
+    public function index(UserRepository $repo)
     {
+        $users = $repo->findAll();
         //Gestion de l'affichage de l'interface de gestion de l'administrateur
-        return $this->render('admin/index.html.twig');
+        return $this->render('admin/index.html.twig',[
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -27,9 +33,26 @@ class AdminController extends AbstractController
         if(!$user){
             $user = new User();
         }
+
+        $form = $this->createForm(UserFormType::class, $user);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            if(!$user->getId()){
+                $user->setCreatedAt(new \DateTime());
+            }
+
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this->redirectToRoute("admin");
+        }
+
         //Créé ou modifie un utilisateur (nom et mdp)
         return $this->render('admin/editUser.html.twig', [
-            'user' => $user,
+            'formUser' => $form->createView(),
+            'editMode' => $user->getId() !== null,
         ]);
     }
 }

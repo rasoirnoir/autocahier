@@ -64,13 +64,16 @@ class MainController extends AbstractController
             }
             $pdi->setUpdatedAt(new \DateTime());
 
+
             $manager->persist($pdi);
             $manager->flush();
 
-            return $this->redirectToRoute("tournee_show", ['id' => $pdi->getTourneeId()]);
+            return $this->redirectToRoute("tournee_show", ['id' => $pdi->getTourneeId()->getId()]);
         }
 
         return $this->render('main/editPdi.html.twig', [
+            'pdiNum' => $pdi->getNumero(),
+            'pdiLibelle' => $pdi->getLibelleId(),
             'formPdi' => $form->createView(),
             'editMode' => $pdi->getId() !== null,
         ]);

@@ -47,6 +47,8 @@ class Libelle
     public function __construct()
     {
         $this->pdis = new ArrayCollection();
+        $this->name = "";
+        $this->ville_id = new Ville();
     }
 
     public function getId(): ?int
@@ -134,6 +136,6 @@ class Libelle
     }
 
     public function __toString(){
-        return $this->name;
+        return $this->name ? $this->name : "";
     }
 }

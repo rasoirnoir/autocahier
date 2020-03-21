@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Libelle;
 use App\Entity\Pdi;
 use App\Entity\Tournee;
 use App\Form\PdiFormType;
@@ -37,12 +38,16 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/pdi/new", name="pdi_new")
-     * @Route("/pdi/{id}", name="pdi_edit")
+     * @Route("/tournee/{tournee}/pdi/new", name="pdi_new")
+     * @Route("/tournee/{tournee}/pdi/{pdi}", name="pdi_edit")
      */
-    public function pdi(Pdi $pdi = null, Request $request, ObjectManager $manager){
+    public function pdi(Tournee $tournee, Pdi $pdi = null, Request $request, ObjectManager $manager){
+        $edit = true;
         if(!$pdi){
             $pdi = new Pdi();
+            $pdi->setTourneeId($tournee);
+            $pdi->setOrdre(0);
+            $edit = false;
         }
         /*
         $form = $this->createFormBuilder($pdi)
@@ -54,7 +59,9 @@ class MainController extends AbstractController
                     ->getForm();
         */
 
-        $form = $this->createForm(PdiFormType::class, $pdi);
+        $form = $this->createForm(PdiFormType::class, $pdi, [
+            'edit' => $edit,
+            ]);
 
         $form->handleRequest($request);
 

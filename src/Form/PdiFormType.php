@@ -15,8 +15,14 @@ class PdiFormType extends AbstractType
     {
         $builder
             ->add('client_name', TextType::class, ['label' => 'Nom'])
-            /*->add('numero')
-            ->add('libelle_id', LibelleType::class, ['label' => 'Libellé'])*/
+        ;
+        if(!$options['edit']){
+            $builder
+                ->add('numero')
+                ->add('libelle_id', LibelleType::class, ['label' => 'Libellé'])
+            ;
+        }
+        $builder
             ->add('is_depot', CheckboxType::class, ['label' => 'Cette adresse est un dépôt', 'required' => false])
             ->add('is_reex', CheckboxType::class, ['label' => 'Présence de contrat de réexpédition', 'required' => false])
             ->add('format')
@@ -27,6 +33,7 @@ class PdiFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Pdi::class,
+            'edit' => false,
         ]);
     }
 }

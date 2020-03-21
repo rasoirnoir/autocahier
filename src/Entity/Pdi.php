@@ -11,7 +11,11 @@ class Pdi
 {
 
     public function __construct(){
+        $this->client_name = "";
         $this->format = '1x1';
+        $this->is_depot = false;
+        $this->is_reex = false;
+        $this->libelle_id = new Libelle();
     }
     /**
      * @ORM\Id()
@@ -59,7 +63,7 @@ class Pdi
     private $tournee_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Libelle", inversedBy="pdis")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Libelle", inversedBy="pdis", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $libelle_id;

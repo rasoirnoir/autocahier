@@ -19,7 +19,7 @@ class PdiFormType extends AbstractType
         if(!$options['edit']){
             $builder
                 ->add('numero')
-                ->add('libelle_id', LibelleType::class, ['label' => 'Libellé'])
+                ->add('libelle_id', LibelleType::class, ['label' => false])
             ;
         }
         $builder

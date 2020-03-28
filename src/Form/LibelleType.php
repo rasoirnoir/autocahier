@@ -14,8 +14,8 @@ class LibelleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => false])
-            ->add('ville_id', VilleType::class)
+            ->add('name', TextType::class, ['label' => 'Libellé'])
+            ->add('ville_id', VilleType::class, ['label' => false])
         ;
     }
 

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Libelle;
 use App\Entity\Pdi;
 use App\Entity\Tournee;
+use App\Entity\Ville;
 use App\Form\PdiFormType;
 use App\Repository\TourneeRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -47,18 +48,21 @@ class MainController extends AbstractController
             $pdi = new Pdi();
             $pdi->setTourneeId($tournee);
             $pdi->setOrdre(0);
+
+            $ville = new Ville();
+            $ville->setCreatedAt(new \DateTime());
+            $ville->setUpdatedAt(new \DateTime());
+
+            $libelle = new Libelle();
+            $libelle->setVilleId($ville);
+            $libelle->setCreatedAt(new \DateTime());
+            $libelle->setUpdatedAt(new \DateTime());
+
+            $pdi->setLibelleId($libelle);
+
             $edit = false;
         }
-        /*
-        $form = $this->createFormBuilder($pdi)
-                    ->add('clientName')
-                    ->add('numero')
-                    ->add('isReex', CheckboxType::class, [
-                        'false_values' => [0, '0'],
-                        ])
-                    ->getForm();
-        */
-
+        
         $form = $this->createForm(PdiFormType::class, $pdi, [
             'edit' => $edit,
             ]);

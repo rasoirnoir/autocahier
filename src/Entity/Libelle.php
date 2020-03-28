@@ -39,7 +39,7 @@ class Libelle
     private $pdis;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="libelles")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="libelles", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $ville_id;
@@ -48,7 +48,7 @@ class Libelle
     {
         $this->pdis = new ArrayCollection();
         $this->name = "";
-        $this->ville_id = new Ville();
+        //$this->ville_id = new Ville();
     }
 
     public function getId(): ?int

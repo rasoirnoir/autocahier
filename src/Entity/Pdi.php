@@ -15,7 +15,7 @@ class Pdi
         $this->format = '1x1';
         $this->is_depot = false;
         $this->is_reex = false;
-        $this->libelle_id = new Libelle();
+        //$this->libelle_id = new Libelle();
     }
     /**
      * @ORM\Id()

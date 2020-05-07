@@ -19,6 +19,17 @@ class PdiRepository extends ServiceEntityRepository
         parent::__construct($registry, Pdi::class);
     }
 
+    /**
+     * @return Pdi[] Returns an Array of Pdis ordered by 'ordre'
+     */
+    public function findAllByOrder(){
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.ordre', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Pdi[] Returns an array of Pdi objects
     //  */

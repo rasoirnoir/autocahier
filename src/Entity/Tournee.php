@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PdiRepository;
+use Doctrine;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TourneeRepository")
@@ -35,6 +37,7 @@ class Tournee
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Pdi", mappedBy="tournee_id")
+     * @ORM\OrderBy({"ordre" = "ASC"})
      */
     private $pdis;
 

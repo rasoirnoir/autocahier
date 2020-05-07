@@ -7,6 +7,7 @@ use App\Entity\Pdi;
 use App\Entity\Tournee;
 use App\Entity\Ville;
 use App\Form\PdiFormType;
+use App\Repository\PdiRepository;
 use App\Repository\TourneeRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

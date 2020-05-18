@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="jumbotron">
+        <h1>dump de requêtes</h1>
+        {% for query in stack.queries %}
+            <div>
+                <p>{{query['sql']}}</p>
+                <p>parameters :
+                    <ul>
+                        {% for param in query.params %}
+                            <li>{{param}}</li>
+                        {% endfor %}
+                    </ul>
+                </p>
+            </div>
+            
+        {% endfor %}
+    </div>
+
+{% endblock %}

@@ -17,12 +17,13 @@
 <div class="jumbotron">
     <h1>Tournee {{ tournee.name }}</h1>
     <table class="table table-hover table-striped table-primary">
-        <tr><th>numéro</th><th>rue</th><th>nom</th></tr>
+        <tr><th>numéro</th><th>rue</th><th>nom</th><th>options</th></tr>
         {% for pdi in tournee.pdis %}
             <tr style="cursor: pointer;" onclick="window.location='{{ path('pdi_edit', {'tournee' : tournee.id, 'pdi': pdi.id}) }}';">
                 <td>{{pdi.numero}}</td>
                 <td>{{pdi.libelleid.name}}</td>
                 <td>{{pdi.clientName}}</td>
+                <td><a href="{{ path('pdi_new', {'tournee' : tournee.id, 'order' : pdi.ordre + 1 }) }}">Ajouter en dessous</a></td>
             </tr>
         {% endfor %}
     </table>

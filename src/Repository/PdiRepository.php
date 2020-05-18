@@ -30,6 +30,47 @@ class PdiRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @return Pdi[] Returns an array of pdis which 'ordre' field equals @param order
+     */
+    public function findByOrder($order, $tournee){
+        return $this->createQueryBuilder('p')
+            ->where('p.ordre = :ordre AND p.tournee_id = :tournee')
+            ->setParameter('ordre', $order)
+            ->setParameter('tournee', $tournee)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Pdi Retourne le pdis dont l'ordre est le plus grand dans la tournée (Le dernier pdi de la tournée)
+     */
+    public function findTopOrder($tournee){
+        return $this->getEntityManager()
+            ->createQuery('SELECT p 
+                            FROM App\Entity\Pdi p 
+                            WHERE p.tournee_id = :tournee 
+                            ORDER BY p.ordre DESC')
+            ->setParameter('tournee', $tournee)
+            ->setMaxResults(1)->getOneOrNullResult();
+    }
+
+    /**
+     * Sort la liste des pdis dont l'ordre est supérieur à celui donné en paramètre et trié en décroissant
+     * @return Pdi[] Une liste de pdi triés dans l'ordre décroissant d'ordre dont l'ordre est supérieur au paramètre donné
+     */
+    public function findAllOrderGreaterThanDesc(int $index, $tournee){
+        return $this->createQueryBuilder('p')
+            ->where('p.ordre >= :ordre AND p.tournee_id = :tournee')
+            ->orderBy('p.ordre', 'DESC')
+            ->setParameter('ordre', $index)
+            ->setParameter('tournee', $tournee)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Pdi[] Returns an array of Pdi objects
     //  */

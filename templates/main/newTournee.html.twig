@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="jumbotron">
+        <h1>Nouvelle tournée</h1>
+        {{form_start(formTournee)}}
+            {{form_widget(formTournee)}}
+            <button type="submit" class="btn btn-primary">
+                Ajouter
+            </button>
+        {{form_end(formTournee)}}
+    </div>
+
+{% endblock %}

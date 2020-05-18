@@ -10,13 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 class Pdi
 {
 
-    public function __construct(){
+    public function __construct(int $order = -1){
         $this->client_name = "";
         $this->format = '1x1';
         $this->is_depot = false;
         $this->is_reex = false;
-        //$this->libelle_id = new Libelle();
+        $this->ordre = $order;
     }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

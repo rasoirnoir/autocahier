@@ -15,8 +15,11 @@
     <div class="jumbotron">
         <h1>Interface de gestion de l'administrateur.</h1>
         <h2>Liste des Utilisateurs.</h2>
+        <p>
+            <a href="{{ path('user_new') }}" class="btn btn-primary btn-sm">Nouvel utilisateur</a>
+        </p>
         <table class="table table-hover table-striped table-primary">
-            <tr><th>Nom</th><th>Role<th></tr>
+            <tr><th>Nom</th><th>Role</th></tr>
             {% for user in users %}
                 <tr style="cursor: pointer;" onclick="window.location='{{ path('user_edit', {'id': user.id}) }}';">
                     <td>{{user.name}}</td>

@@ -76,7 +76,7 @@ class MainController extends AbstractController
     public function pdi(Tournee $tournee, Pdi $pdi = null, int $order = -1, Request $request, ObjectManager $manager){
         $edit = true;
         if(!$pdi){
-            if($order != -1){
+            if($order > -1){
                 //Si un ordre est donné (on ajoute le pdi au milieu de la tournée)
                 //alors il va falloir décaler tous les autres pour insérer celui-là
                 $repo = $this->getDoctrine()->getRepository(Pdi::class);
@@ -85,6 +85,9 @@ class MainController extends AbstractController
                     $pdiAModifier->setOrdre($pdiAModifier->getOrdre() + 1);
                     $manager->persist($pdiAModifier);
                 }                
+            }
+            else{
+                $order = -1;
             }
             $pdi = new Pdi();
             $pdi->setTourneeId($tournee);

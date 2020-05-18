@@ -16,6 +16,9 @@
 
 <div class="jumbotron">
     <h1>Tournee {{ tournee.name }}</h1>
+    <p>
+        <a href="{{ path('pdi_new', {'tournee' : tournee.id, 'order' : 0}) }}" class="btn btn-primary btn-sm">Nouveau PDI</a>
+    </p>
     <table class="table table-hover table-striped table-primary">
         <tr><th>numéro</th><th>rue</th><th>nom</th><th>options</th></tr>
         {% for pdi in tournee.pdis %}

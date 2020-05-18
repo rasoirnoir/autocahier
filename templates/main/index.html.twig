@@ -16,6 +16,10 @@
 -->
 <div class="jumbotron">
     <h1>Liste des tournée.</h1>
+    <p>
+        <a href="{{ path('tournee_new') }}" class="btn btn-primary btn-sm">Nouvelle tournée</a>
+    </p>
+    
     <table class="table table-hover table-striped table-primary">
         {% for tournee in tournees %}
             <tr style="cursor: pointer;" onclick="window.location='{{ path('tournee_show', {'id': tournee.id}) }}';">

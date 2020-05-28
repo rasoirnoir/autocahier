@@ -94,13 +94,13 @@ class MainController extends AbstractController
             $pdi->setOrdre($order);
 
             $ville = new Ville();
-            $ville->setCreatedAt(new \DateTime());
-            $ville->setUpdatedAt(new \DateTime());
+            //$ville->setCreatedAt(new \DateTime());
+            //$ville->setUpdatedAt(new \DateTime());
 
             $libelle = new Libelle();
             $libelle->setVilleId($ville);
-            $libelle->setCreatedAt(new \DateTime());
-            $libelle->setUpdatedAt(new \DateTime());
+            //$libelle->setCreatedAt(new \DateTime());
+            //$libelle->setUpdatedAt(new \DateTime());
 
             $pdi->setLibelleId($libelle);
 
@@ -114,6 +114,41 @@ class MainController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            //Vérification de l'existence de la ville et de la rue dans la base de donnée
+            //afin d'éviter de créer des doublons
+            $allVilles = $this->getDoctrine()->getRepository(Ville::class)->findAll();
+            $allLibelles = $this->getDoctrine()->getRepository(Libelle::class)->findAll();
+
+            $nVille = false;
+            $nLibelle = false;
+            foreach($allVilles as $v){
+                if( //On vérifie si une ville du même nom et même code postal existe deja dans la base de données
+                $pdi->getLibelleId()->getVilleId()->getName() == $v->getName() 
+                    && 
+                $pdi->getLibelleId()->getVilleId()->getPostalCode() == $v->getPostalCode()){
+                    $pdi->getLibelleId()->setVilleId($v);
+
+                    foreach($allLibelles as $l){ //Si la ville existe deja, on vérifie si un libelle portant de le même nom n'existe pas deja.
+                        if($pdi->getLibelleId()->getName() == $l->getName() && $pdi->getLibelleId()->getVilleId() == $l->getVilleId()){
+                            $pdi->setLibelleId($l);
+                            $nLibelle = true;
+                        break;
+                        }
+                    }
+                    $nVille = true;
+                break;
+                }
+            }
+            switch(false){
+                case $nVille:
+                    $pdi->getLibelleId()->getVilleId()->setCreatedAt(new \DateTime());
+                    $pdi->getLibelleId()->getVilleId()->setUpdatedAt(new \DateTime());
+                case $nLibelle:
+                    $pdi->getLibelleId()->setCreatedAt(new \DateTime());
+                    $pdi->getLibelleId()->setUpdatedAt(new \DateTime());
+                default:
+            }
             if(!$pdi->getId()){
                 $pdi->setCreatedAt(new \DateTime());
             }

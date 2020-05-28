@@ -94,13 +94,9 @@ class MainController extends AbstractController
             $pdi->setOrdre($order);
 
             $ville = new Ville();
-            //$ville->setCreatedAt(new \DateTime());
-            //$ville->setUpdatedAt(new \DateTime());
 
             $libelle = new Libelle();
             $libelle->setVilleId($ville);
-            //$libelle->setCreatedAt(new \DateTime());
-            //$libelle->setUpdatedAt(new \DateTime());
 
             $pdi->setLibelleId($libelle);
 

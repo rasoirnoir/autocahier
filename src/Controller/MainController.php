@@ -24,6 +24,7 @@ class MainController extends AbstractController
      */
     public function index(TourneeRepository $repo)
     {
+        //ICI possibilité d'appliquer un filtre sur les tournées affichées en fonction des droits de l'utilisateur
         $tournees = $repo->findAll();
         return $this->render('main/index.html.twig', [
             'tournees' => $tournees,
@@ -56,6 +57,17 @@ class MainController extends AbstractController
             'formTournee' => $form->createView(),
         ]);
         
+    }
+
+    /**
+     * @Route("/tournee/delete/{id}", name="tournee_delete")
+     */
+    public function deleteTournee(Tournee $tournee, ObjectManager $manager){
+        if($tournee != null){
+            $manager->remove($tournee);
+            $manager->flush();
+        }
+        return $this->redirectToRoute("main");
     }
 
     /**
@@ -163,6 +175,17 @@ class MainController extends AbstractController
             'formPdi' => $form->createView(),
             'editMode' => $pdi->getId() !== null,
         ]);
+    }
+
+    /**
+     * @Route("/tournee/{tournee}/pdi/{pdi}/delete", name="pdi_delete")
+     */
+    public function deletePdi(Pdi $pdi, ObjectManager $manager){
+        if($pdi != null){
+            $manager->remove($pdi);
+            $manager->flush();
+        }
+        return $this->redirectToRoute("tournee_show", ['id' => $pdi->getTourneeId()->getId()]);
     }
 
     /**

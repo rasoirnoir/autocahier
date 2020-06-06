@@ -26,7 +26,7 @@
                 <td>{{pdi.numero}}</td>
                 <td>{{pdi.libelleid.name}}</td>
                 <td>{{pdi.clientName}}</td>
-                <td><a href="{{ path('pdi_new', {'tournee' : tournee.id, 'order' : pdi.ordre + 1 }) }}">Ajouter en dessous</a></td>
+                <td><a href="{{ path('pdi_new', {'tournee' : tournee.id, 'order' : pdi.ordre + 1 }) }}">Ajouter en dessous</a>    <a href="{{ path('pdi_delete', {'tournee' : tournee.id, 'pdi': pdi.id}) }}">X</a></td>
             </tr>
         {% endfor %}
     </table>

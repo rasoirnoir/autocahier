@@ -19,11 +19,12 @@
             <a href="{{ path('user_new') }}" class="btn btn-primary btn-sm">Nouvel utilisateur</a>
         </p>
         <table class="table table-hover table-striped table-primary">
-            <tr><th>Nom</th><th>Role</th></tr>
+            <tr><th>Nom</th><th>Role</th><th></th></tr>
             {% for user in users %}
                 <tr style="cursor: pointer;" onclick="window.location='{{ path('user_edit', {'id': user.id}) }}';">
                     <td>{{user.name}}</td>
                     <td>{{user.role}}</td>
+                    <td><a href="{{ path('user_delete', {'id': user.id}) }}">X</a></td>
                 </tr>
             {% endfor %}
         </table>

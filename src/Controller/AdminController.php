@@ -55,4 +55,15 @@ class AdminController extends AbstractController
             'editMode' => $user->getId() !== null,
         ]);
     }
+
+    /**
+     * @Route("/admin/delete/{id}", name="user_delete")
+     */
+    public function deleteUser(User $user, ObjectManager $manager){
+        if($user != null){
+            $manager->remove($user);
+            $manager->flush();
+        }
+        return $this->redirectToRoute("admin");
+    }
 }

@@ -15,7 +15,7 @@
     </ul>
 -->
 <div class="jumbotron">
-    <h1>Liste des tournée.</h1>
+    <h1>Liste des tournées.</h1>
     <p>
         <a href="{{ path('tournee_new') }}" class="btn btn-primary btn-sm">Nouvelle tournée</a>
     </p>
@@ -25,6 +25,7 @@
             <tr style="cursor: pointer;" onclick="window.location='{{ path('tournee_show', {'id': tournee.id}) }}';">
                 <td>{{tournee.name}}</td>
                 <td>Dernière modification le {{ tournee.createdAt | date('d/m/Y à H:m') }}</td>
+                <!--<td><a href="{{ path('tournee_delete', {'id': tournee.id}) }}">X</a></td>-->
             </tr>
         {% endfor %}
     </table>

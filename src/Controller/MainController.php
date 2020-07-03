@@ -181,9 +181,19 @@ class MainController extends AbstractController
      * @Route("/tournee/{tournee}/pdi/{pdi}/delete", name="pdi_delete")
      */
     public function deletePdi(Pdi $pdi, ObjectManager $manager){
+        //Attention, à la suppression d'un pdi, l'ordre des suivant doit être décrémenté, sinon ça laisse un trou dans l'ordre
         if($pdi != null){
             $manager->remove($pdi);
-            $manager->flush();
+
+            $repo = $this->getDoctrine()->getRepository(Pdi::class);
+                $pdisAModifier = $repo->findAllOrderGreaterThanDesc($pdi->getOrdre(), $pdi->getTourneeId()->getId());
+                foreach($pdisAModifier as $pdiAModifier){
+                    $pdiAModifier->setOrdre($pdiAModifier->getOrdre() - 1);
+                    $manager->persist($pdiAModifier);
+                } 
+
+
+            $manager->flush(); 
         }
         return $this->redirectToRoute("tournee_show", ['id' => $pdi->getTourneeId()->getId()]);
     }

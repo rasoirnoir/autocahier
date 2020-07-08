@@ -10,6 +10,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends AbstractController
 {
@@ -29,7 +30,7 @@ class AdminController extends AbstractController
      * @Route("/admin/new", name="user_new")
      * @Route("/admin/{id}", name="user_edit")
      */
-    public function user(User $user = null, Request $request, ObjectManager $manager){
+    public function user(User $user = null, Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
         if(!$user){
             $user = new User();
         }
@@ -39,6 +40,9 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            //Encodage du password
+            $encodedPass = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($encodedPass);
             if(!$user->getId()){
                 $user->setCreatedAt(new \DateTime());
             }

@@ -23,7 +23,10 @@
             {% for user in users %}
                 <tr style="cursor: pointer;" onclick="window.location='{{ path('user_edit', {'id': user.id}) }}';">
                     <td>{{user.name}}</td>
-                    <td>{{user.role}}</td>
+                    <td>{% for role in user.roles %}
+                            {{role}}
+                        {% endfor %}
+                    </td>
                     <td><a href="{{ path('user_delete', {'id': user.id}) }}">X</a></td>
                 </tr>
             {% endfor %}

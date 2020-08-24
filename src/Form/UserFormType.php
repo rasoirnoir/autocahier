@@ -19,7 +19,7 @@ class UserFormType extends AbstractType
         $builder
             ->add('name', TextType::class, ['label' => 'Nom'])
             ->add('password', PasswordType::class, ['label' => 'Nouveau mot de passe'])
-            ->add('role', null, ['label' => 'Rôle'])
+            //->add('roles', null, ['label' => 'Rôle']) //TODO: changer le type de champ
         ;
     }
 

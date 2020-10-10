@@ -38,10 +38,12 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
+    
 
     public function __construct()
     {
-        $this->roles = new ArrayCollection();
+        //$this->roles = new ArrayCollection();
+        // $this->roles = 'ROLE_USER';
     }
 
     public function getId(): ?int
@@ -96,8 +98,10 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
+        // array_push($roles, 'ROLE_USER');
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        // dd($roles);
         return array_unique($roles);
     }
 
@@ -124,21 +128,41 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function addRole(Role $role): self
+    // public function addRole(Role $role): self
+    // {
+    //     if (!$this->roles->contains($role)) {
+    //         $this->roles[] = $role;
+    //     }
+
+    //     return $this;
+    // }
+
+    public function setRoles(array $roles): self
     {
-        if (!$this->roles->contains($role)) {
-            $this->roles[] = $role;
-        }
+        $this->roles = $roles;
+        // if (!in_array($role, $this->roles)) {
+        //     $this->roles[] = $role;
+        // }
 
         return $this;
     }
 
-    public function removeRole(Role $role): self
-    {
-        if ($this->roles->contains($role)) {
-            $this->roles->removeElement($role);
-        }
+   
+    // public function removeRole(Role $role): self
+    // {
+    //     if ($this->roles->contains($role)) {
+    //         $this->roles->removeElement($role);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
+
+    // public function removeRole(String $role): self
+    // {
+    //     if (in_array($role, $this->roles)) {
+    //         unset($this->roles[$role]);
+    //     }
+
+    //     return $this;
+    // }
 }

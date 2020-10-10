@@ -20,6 +20,7 @@ class AdminController extends AbstractController
     public function index(UserRepository $repo)
     {
         $users = $repo->findAll();
+        //dd($users);
         //Gestion de l'affichage de l'interface de gestion de l'administrateur
         return $this->render('admin/index.html.twig',[
             'users' => $users,

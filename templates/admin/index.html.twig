@@ -23,10 +23,16 @@
             {% for user in users %}
                 <tr style="cursor: pointer;" onclick="window.location='{{ path('user_edit', {'id': user.id}) }}';">
                     <td>{{user.name}}</td>
-                    <td>{% for role in user.roles %}
+                    {# <td>{% for role in user.roles %}
+                            {{ role }} 
+                        {% endfor %}</td> #}
+                    {# <td>{{dump(user.roles) | join()}}</td> #}
+                    {# <td>{{ user.roles|json_encode(constant('JSON_PRETTY_PRINT')) }} </td> #}
+                    {# <td>{{user.roles | join(', ')}}</td> #}
+                    {# <td>{% for role in user.roles %}
                             {{role}}
                         {% endfor %}
-                    </td>
+                    </td> #}
                     <td><a href="{{ path('user_delete', {'id': user.id}) }}">X</a></td>
                 </tr>
             {% endfor %}
